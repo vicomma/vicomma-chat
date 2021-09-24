@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>initiate Chat</title>
+</head>
+<body>
+    <button class="initiateChat" value="5797389889888">Sabastine Nwanchukwu</button>
+    <button class="initiateChat" value="5797389889866">Judah Olaobaju</button>
+    <button class="initiateChat" value="5797389889888">John Doe</button>
+    <input class="product" type="hidden" name="product" value="SportBoots">
+    <script src="./js/functions.js"></script>
+    <script>
+        const btns = document.querySelectorAll('.initiateChat');
+        const product  = document.querySelector('.product');
+
+        btns.forEach((btn) => { 
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                let payload = {
+                    url: 'http://localhost:3000/register-chat',
+                    data:{
+                        projectName: product.value,
+                        vendor: {
+                            id: "5797389889877",
+                            name: "JustWorking"
+                        } ,
+                        influencer: {
+                            id:btn.value,
+                            firstname:"Sabastine",
+                            lastname:"Nwanchukwu"
+                        }
+                    }
+                }
+
+                saveLocally('profile', {
+                            id: "5797389889877",
+                            name: "JustWorking",
+                            type: "vendor"
+                })
+
+
+                localStorage.setItem('projectName',product.value);
+
+                const { url, data } = payload
+
+                postData(url, data)
+                .then( data => {
+                    console.log(data.message)
+                    window.location = 'http://localhost:3000/chat-2.html'
+                })
+            })
+
+        });
+    </script>
+</body>
+</html>

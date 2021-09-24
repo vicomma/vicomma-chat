@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influencer</title>
+</head>
+<body>
+
+    <button class="joinChat" value="SportBoots"> Join the Chat</button> 
+    <!-- the value of this button should be the product or projectName -->
+
+    <script src="./js/functions.js"></script>
+    <script>
+        const btns = document.querySelectorAll('.joinChat');
+        btns.forEach((btn) => { 
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                saveLocally('profile', {
+                    id: "5797389889888",
+                    name: "Sabastine Nwanchukwu",
+                    type: "influencer"
+                });
+                localStorage.setItem('projectName',btn.value);
+                window.location = 'http://localhost:3000/chat-2.html'
+            })
+
+        });
+    </script>
+</body>
+</html>
