@@ -1,0 +1,43 @@
+{
+  "name": "vicomma-chat",
+  "version": "1.0.0",
+  "description": "the vicoma chat module.",
+  "main": "index.js",
+  "scripts": {
+    "start": "forever server.js",
+    "test": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vicomma/vicomma-chat.git"
+  },
+  "keywords": [
+    "chat",
+    "vicomma",
+    "vendor-influencer",
+    "communication",
+    "messaging"
+  ],
+  "author": "Olaobaju Abraham",
+  "license": "GPL-3.0+",
+  "bugs": {
+    "url": "https://github.com/vicomma/vicomma-chat/issues"
+  },
+  "homepage": "https://github.com/vicomma/vicomma-chat#readme",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "express": "^4.17.1",
+    "forever": "^4.0.1",
+    "googleapis": "^87.0.0",
+    "ioredis": "^4.27.9",
+    "moment": "^2.29.1",
+    "redis-json": "^6.0.1",
+    "socket.io": "^4.2.0",
+    "sweetalert": "^2.1.2"
+  },
+  "engines": {
+    "node": "16.x"
+  }
+}
