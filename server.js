@@ -32,7 +32,7 @@ const {
 
 const { initateChat, newMessage } = require("./Utils/events");
 var corsOptions = {
-  origin: "*",
+  origin: ["http://127.0.0.1:8000", "*"],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
