@@ -1,0 +1,24 @@
+{
+    "logLevel": "debug",
+    "session": {
+      "secret": "red15alltheTh1ngZ!",
+      "appName": "vicomma-chat",
+      "keyPrefix": "session"  
+    },
+    "application": {
+      "port": 3000
+    },
+    "auth": {
+      "port": 8083
+    },
+    "checkinReceiver": {
+      "port": 8082,
+      "maxStreamLength": 500000
+    },
+    "redis": {
+      "host": "ec2-3-82-123-53.compute-1.amazonaws.com",
+      "port": 27820,
+      "password": "p9643d7f730a717a3efbd9e2458bd72bd798134730748198da065c4332c9184cc",
+      "keyPrefix": "vicomma"
+    }
+  }
