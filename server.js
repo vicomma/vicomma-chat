@@ -13,11 +13,15 @@ const encrytionKey =
   process.env.VICOMMA_ENCRYPTION_KEY || "vc-8778944850-boom==";
 const { google } = require("googleapis");
 config.set("config.json");
-const redis = new Redis(process.env.REDIS_URL, {
-  tls: {
-    rejectUnauthorized: false,
-  },
-});
+const redis = new Redis(
+  process.env.REDIS_URL ||
+    "redis://:p9643d7f730a717a3efbd9e2458bd72bd798134730748198da065c4332c9184cc@ec2-3-82-123-53.compute-1.amazonaws.com:27820",
+  {
+    tls: {
+      rejectUnauthorized: false,
+    },
+  }
+);
 app.use(cors());
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")));
@@ -32,7 +36,11 @@ const {
 
 const { initateChat, newMessage } = require("./Utils/events");
 var corsOptions = {
-  origin: ["http://127.0.0.1:8000", "*"],
+  origin: [
+    "http://127.0.0.1:8000",
+    "https://vicomma-stagingrevamp.herokuapp.com",
+    "https://vicommadev-chat.herokuapp.com",
+  ],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
