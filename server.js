@@ -14,11 +14,7 @@ const encrytionKey =
 const { google } = require("googleapis");
 config.set("config.json");
 const redis = new Redis({
-  port: config.redis.port, // Redis port
-  host: config.redis.host, // Redis host
-  family: 4, // 4 (IPv4) or 6 (IPv6)
-  password: config.redis.password,
-  db: 0,
+  uri: process.env.REDIS_URL,
   tls: { rejectUnauthorized: false },
 });
 app.use(cors());
