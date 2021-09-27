@@ -1,13 +1,10 @@
 //register chat
 const Redis = require("ioredis");
-const redis = new Redis(
-  "redis://:p9643d7f730a717a3efbd9e2458bd72bd798134730748198da065c4332c9184cc@ec2-3-82-123-53.compute-1.amazonaws.com:27820",
-  {
-    tls: {
-      rejectUnauthorized: false,
-    },
-  }
-);
+const redis = new Redis(process.env.REDIS_URL, {
+  tls: {
+    rejectUnauthorized: false,
+  },
+});
 const JSONCache = require("redis-json");
 
 const { v4: uuidv4 } = require("uuid");
