@@ -36,11 +36,12 @@ const {
 
 const { initateChat, newMessage } = require("./Utils/events");
 var corsOptions = {
-  origin: [
-    "http://127.0.0.1:8000",
-    "https://vicomma-stagingrevamp.herokuapp.com",
-    "https://vicommadev-chat.herokuapp.com",
-  ],
+  // origin: [
+  //   "http://127.0.0.1:8000",
+  //   "https://vicomma-stagingrevamp.herokuapp.com",
+  //   "https://vicommadev-chat.herokuapp.com",
+  // ],
+  origin: "*",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
