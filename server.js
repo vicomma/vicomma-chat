@@ -51,7 +51,7 @@ app.post("/register-chat", async (req, res) => {
   // console.log(influencer)
   let registration_status = false;
 
-  registration_status = boolean(await isChatRegisted({ vendor, influencer }));
+  //registration_status = boolean(await isChatRegisted({ vendor, influencer }));
 
   if (!registration_status) {
     initateChat.emit("saveDetails", { vendor, projectName, influencer }); // saveDetails eventHandler
