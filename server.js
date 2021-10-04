@@ -47,7 +47,7 @@ var corsOptions = {
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
-app.post("/register-chat", cors(), async (req, res) => {
+app.post("/register-chat", cors({ origin: "*" }), async (req, res) => {
   const { vendor, projectName, influencer } = req.body;
   // console.log(influencer)
   let registration_status = false;
