@@ -69,7 +69,7 @@ app.post("/register-chat", async (req, res) => {
   res.json(response);
 });
 
-app.get("/rcd", cors(), async (req, res) => {
+app.get("/rcd", cors(corsOptions), async (req, res) => {
   const { id } = req.query;
   //Decrypt
   let bytes = CryptoJS.AES.decrypt(id, encrytionKey);
