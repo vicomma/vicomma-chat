@@ -47,37 +47,38 @@ var corsOptions = {
 };
 
 app.post("/register-chat", async (req, res, next) => {
-  const { vendor, projectName, influencer } = req.body;
-  // console.log(influencer)
-  let registration_status = false;
-  const callback = (err, success) => {
-    if (err) {
-      res.status(400);
-      res.send({ message: "chat already exist" });
-      console.error(err);
-    } else {
-      res.status(200);
-      res.send({ message: "chat registered" });
-      console.error(success);
-    }
-  };
+  // const { vendor, projectName, influencer } = req.body;
+  // // console.log(influencer)
+  // let registration_status = false;
+  // const callback = (err, success) => {
+  //   if (err) {
+  //     res.status(400);
+  //     res.send({ message: "chat already exist" });
+  //     console.error(err);
+  //   } else {
+  //     res.status(200);
+  //     res.send({ message: "chat registered" });
+  //     console.error(success);
+  //   }
+  // };
 
-  registration_status = boolean(await isChatRegisted({ vendor, influencer }));
+  // registration_status = boolean(await isChatRegisted({ vendor, influencer }));
 
-  if (!registration_status) {
-    initateChat.emit("saveDetails", { vendor, projectName, influencer }); // saveDetails eventHandler
-  }
-  // Encrypt
-  var ciphertext = CryptoJS.AES.encrypt(
-    JSON.stringify(req.body),
-    encrytionKey
-  ).toString();
+  // if (!registration_status) {
+  //   initateChat.emit("saveDetails", { vendor, projectName, influencer }); // saveDetails eventHandler
+  // }
+  // // Encrypt
+  // var ciphertext = CryptoJS.AES.encrypt(
+  //   JSON.stringify(req.body),
+  //   encrytionKey
+  // ).toString();
 
-  let response = Object.assign({}, req.body, {
-    id: ciphertext,
-    chat_status: registration_status,
-  });
-  res.json(response);
+  // let response = Object.assign({}, req.body, {
+  //   id: ciphertext,
+  //   chat_status: registration_status,
+  // });
+  // res.json(response);
+  res.json(req.body);
 });
 
 app.get("/rcd", cors(corsOptions), async (req, res) => {
