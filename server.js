@@ -7,7 +7,6 @@ const config = require("better-config");
 const app = express();
 const server = http.createServer(app);
 const cors = require("cors");
-const CryptoJS = require("crypto-js");
 const JSONCache = require("redis-json"); //save JSON objects
 const encrytionKey =
   process.env.VICOMMA_ENCRYPTION_KEY || "vc-8778944850-boom==";
@@ -34,6 +33,8 @@ const {
   isChatRegisted,
 } = require("./Utils/chat");
 
+const { encryptData, decryptData } = require("./Utils/encrypt");
+
 const { initateChat, newMessage } = require("./Utils/events");
 var corsOptions = {
   // origin: [
@@ -57,10 +58,7 @@ app.post("/register-chat", cors(), async (req, res) => {
     initateChat.emit("saveDetails", { vendor, projectName, influencer }); // saveDetails eventHandler
   }
   // Encrypt
-  var ciphertext = CryptoJS.AES.encrypt(
-    JSON.stringify(req.body),
-    encrytionKey
-  ).toString();
+  var ciphertext = encryptData(req.body, encrytionKey);
 
   let response = Object.assign({}, req.body, {
     id: ciphertext,
@@ -72,8 +70,7 @@ app.post("/register-chat", cors(), async (req, res) => {
 app.get("/rcd", cors(corsOptions), async (req, res) => {
   const { id } = req.query;
   //Decrypt
-  let bytes = CryptoJS.AES.decrypt(id, encrytionKey);
-  let originalText = bytes.toString(CryptoJS.enc.Utf8);
+  let originalText = decryptData(id, encrytionKey);
   const { vendor, influencer } = JSON.parse(originalText);
   const { newid, messages } = await getChatMessages(
     `${vendor.id}:${influencer.id}`
