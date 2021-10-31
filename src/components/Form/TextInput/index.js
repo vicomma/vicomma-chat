@@ -7,7 +7,7 @@ const Input = ({ type, name, onChange, style }) => {
       <input
         type={type}
         name={name}
-        placeholder={  }
+        placeholder={"text example"}
         style={styles}
         onChange={(e) => {
           onChange(e);
