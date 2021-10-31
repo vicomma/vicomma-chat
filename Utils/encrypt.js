@@ -1,7 +1,7 @@
 const CryptoJS = require("crypto-js");
 
 const encryptData = (payload, encrytionKey) => {
-  CryptoJS.AES.encrypt(JSON.stringify(paylaod), encrytionKey).toString();
+  CryptoJS.AES.encrypt(JSON.stringify(payload), encrytionKey).toString();
   return;
 };
 const decryptData = (id, encrytionKey) => {
