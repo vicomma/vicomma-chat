@@ -2,7 +2,7 @@
 const Redis = require("ioredis");
 const redis = new Redis(
   process.env.REDIS_URL ||
-    "redis://:p9643d7f730a717a3efbd9e2458bd72bd798134730748198da065c4332c9184cc@ec2-3-82-123-53.compute-1.amazonaws.com:27820",
+    "redis://:p9643d7f730a717a3efbd9e2458bd72bd798134730748198da065c4332c9184cc@ec2-54-157-81-189.compute-1.amazonaws.com:12880",
   {
     tls: {
       rejectUnauthorized: false,

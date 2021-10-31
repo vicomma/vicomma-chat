@@ -1,0 +1,15 @@
+import React from "react";
+import Settings from "./components/settings";
+import Content from "./components/content";
+import Header from "./components/header";
+import "./index.scss";
+function App() {
+  return (
+    <React.Fragment>
+      <Header />
+      <Content />
+      {/* <Settings /> */}
+    </React.Fragment>
+  );
+}
+export default App;
