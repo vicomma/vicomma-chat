@@ -13,7 +13,7 @@ const encrytionKey =
 const { google } = require("googleapis");
 config.set("config.json");
 const redis = new Redis(
-  process.env.REDIS_URL ||
+  process.env.REDIS_TLS_URL ||
     "redis://:p9643d7f730a717a3efbd9e2458bd72bd798134730748198da065c4332c9184cc@ec2-54-157-81-189.compute-1.amazonaws.com:12880",
   {
     tls: {
