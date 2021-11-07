@@ -53,13 +53,13 @@ app.post("/register-chat", cors({ origin: "*" }), async (req, res) => {
   let registration_status = false;
 
   //registration_status = boolean(await isChatRegisted({ vendor, influencer }));
-
+  // console.log("hello mate");
   if (!registration_status) {
     initateChat.emit("saveDetails", { vendor, projectName, influencer }); // saveDetails eventHandler
   }
   // Encrypt
-  var ciphertext = encryptData(req.body, encrytionKey);
-
+  let ciphertext = encryptData(req.body, encrytionKey);
+  console.log(ciphertext);
   let response = Object.assign({}, req.body, {
     id: ciphertext,
     chat_status: registration_status,
