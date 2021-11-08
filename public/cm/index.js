@@ -1,7 +1,8 @@
 const toggleButton = document.querySelector(".dark-light");
 const colors = document.querySelectorAll(".color");
 const projectTitle = document.querySelector(".chat-area-title");
-const mode = "vendor";
+var urlParams = new URLSearchParams(window.location.search);
+const mode = encodeURIComponent(urlParams.get("mode"));
 const mainProfile = document.querySelector(".user-profile");
 
 // const SpeechRecognition = webkitSpeechRecognition;
