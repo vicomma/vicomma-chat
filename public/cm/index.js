@@ -19,26 +19,25 @@ const chat_search_input = document.querySelector(".chat-search");
 const message_content = document.querySelectorAll(".chat-msg-text");
 
 const getPort = async () => {
-  let response = await axios
-    .get(window.location.origin + "/get-port")
-    .then((res) => {
-      commenceChatApp(
-        response,
-        mode,
-        mainProfile,
-        influ_profile_right_side_name,
-        influ_profile_right_side_pic,
-        influ_profile_pic,
-        influencer_name,
-        initiatedDate,
-        participants,
-        main_chat_area,
-        entry_point,
-        chat_search_input,
-        message_content,
-        urlParams
-      );
-    });
+  let response = await axios.get(window.location.origin + "/get-port");
+  response.then((res) => {
+    commenceChatApp(
+      res,
+      mode,
+      mainProfile,
+      influ_profile_right_side_name,
+      influ_profile_right_side_pic,
+      influ_profile_pic,
+      influencer_name,
+      initiatedDate,
+      participants,
+      main_chat_area,
+      entry_point,
+      chat_search_input,
+      message_content,
+      urlParams
+    );
+  });
 };
 
 const commenceChatApp = (
