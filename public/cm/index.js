@@ -5,6 +5,7 @@ var urlParams = new URLSearchParams(window.location.search);
 const mode = encodeURIComponent(urlParams.get("mode"));
 const mainProfile = document.querySelector(".user-profile");
 let ActionPort = "";
+let socket = "";
 const influencer_name = document.querySelector(".msg-username");
 const influ_profile_pic = document.querySelector(".msg-profile");
 const influ_profile_right_side_name = document.querySelector(".detail-title");
@@ -100,6 +101,7 @@ chat_search_input.addEventListener("keyup", () => {
 
 function setActionPort(port) {
   ActionPort = port;
+  socket = io("ws://" + window.location.origin + ":" + ActionPort);
 }
 
 window.addEventListener("message", (message) => {
