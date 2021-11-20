@@ -104,39 +104,6 @@ function setActionPort(port) {
   socket = io("ws://" + window.location.origin + ":" + ActionPort);
 }
 
-window.addEventListener("message", (message) => {
-  //console.log(message.origin);
-  //collect chat data from message vendor_id:influencer_id
-  // console.log(message.data);
-  const { id, port } = message.data;
-  setActionPort(port);
-  axios
-    .get(window.location.origin + "/rcd?id=" + id)
-    .then((data) => renderApp(data.data));
-});
-
-async function postData(url = "", data = {}) {
-  // Default options are marked with *
-  const headers = {
-    "Content-Type": "application/json",
-  };
-
-  return axios.post(url, data, {
-    "Access-Control-Allow-Origin": "*",
-    headers: headers,
-  });
-}
-
-//listen for new message
-socket.on("newMessage", (newMessage) => {
-  displayNewMessage(newMessage);
-});
-
-async function getData(url = "", callback) {
-  // Default options are marked with *
-  axios.get(url).then((data) => callback(data.data));
-}
-
 const renderApp = (data) => {
   let { projectName, vendor, influencer, messages, id } = data;
   console.log(data);
@@ -181,6 +148,16 @@ const renderApp = (data) => {
     }
   });
 };
+
+//listen for new message
+socket.on("newMessage", (newMessage) => {
+  displayNewMessage(newMessage);
+});
+
+async function getData(url = "", callback) {
+  // Default options are marked with *
+  axios.get(url).then((data) => callback(data.data));
+}
 
 const getPrevMessages = async ({ id, messages }) => {
   let goody = {
@@ -301,6 +278,29 @@ const removeElement = (element) => {
   //add Disappear
   return element.classList("disappear-element");
 };
+
+async function postData(url = "", data = {}) {
+  // Default options are marked with *
+  const headers = {
+    "Content-Type": "application/json",
+  };
+
+  return axios.post(url, data, {
+    "Access-Control-Allow-Origin": "*",
+    headers: headers,
+  });
+}
+
+window.addEventListener("message", (message) => {
+  //console.log(message.origin);
+  //collect chat data from message vendor_id:influencer_id
+  // console.log(message.data);
+  const { id, port } = message.data;
+  setActionPort(port);
+  axios
+    .get(window.location.origin + "/rcd?id=" + id)
+    .then((data) => renderApp(data.data));
+});
 
 // recognition.onstart = function() {
 //     console.log("Speak into the microphone");
