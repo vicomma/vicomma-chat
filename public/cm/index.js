@@ -1,4 +1,3 @@
-import PORT from "./port.js";
 const toggleButton = document.querySelector(".dark-light");
 const colors = document.querySelectorAll(".color");
 const projectTitle = document.querySelector(".chat-area-title");
