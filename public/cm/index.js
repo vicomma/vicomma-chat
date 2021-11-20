@@ -4,13 +4,6 @@ const projectTitle = document.querySelector(".chat-area-title");
 var urlParams = new URLSearchParams(window.location.search);
 const mode = encodeURIComponent(urlParams.get("mode"));
 const mainProfile = document.querySelector(".user-profile");
-axios
-  .get(window.location.origin + "/get-port")
-  .then(
-    (data) =>
-      (document.querySelector('input[name = "vport"]').value = data.data.port)
-  );
-
 const socket = io(`ws://vicommadev-chat.herokuapp.com:${PORT}`);
 
 // const SpeechRecognition = webkitSpeechRecognition;

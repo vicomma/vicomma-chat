@@ -1,3 +1,6 @@
-const port = process.env.PORT || 4000;
-
-export default port;
+axios
+  .get(window.location.origin + "/get-port")
+  .then(
+    (data) =>
+      (document.querySelector('input[name = "vport"]').value = data.data.port)
+  );
