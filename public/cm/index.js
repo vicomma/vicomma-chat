@@ -4,7 +4,7 @@ const projectTitle = document.querySelector(".chat-area-title");
 var urlParams = new URLSearchParams(window.location.search);
 const mode = encodeURIComponent(urlParams.get("mode"));
 const mainProfile = document.querySelector(".user-profile");
-const port = "";
+const ActionPort = "";
 const influencer_name = document.querySelector(".msg-username");
 const influ_profile_pic = document.querySelector(".msg-profile");
 const influ_profile_right_side_name = document.querySelector(".detail-title");
@@ -98,14 +98,19 @@ chat_search_input.addEventListener("keyup", () => {
   textFind(tts);
 });
 
+setActionPort(port){
+  ActionPort = port;
+}
+
 window.addEventListener("message", (message) => {
   //console.log(message.origin);
   //collect chat data from message vendor_id:influencer_id
-  console.log(message.data);
-  // const id = message.data;
-  // axios
-  //   .get(window.location.origin + "/rcd?id=" + id)
-  //   .then((data) => renderApp(data.data));
+  // console.log(message.data);
+  const { id, port } = message.data;
+  setActionPort(port);
+  axios
+    .get(window.location.origin + "/rcd?id=" + id)
+    .then((data) => renderApp(data.data));
 });
 
 async function postData(url = "", data = {}) {
