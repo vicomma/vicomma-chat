@@ -1,1 +1,1 @@
-web: npm install webpack && npm run build:production && npm run start
+web: npm run start
