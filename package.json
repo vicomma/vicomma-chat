@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "build": "webpack --mode=production",
-    "test": "webpack --mode=development"
+    "test": "webpack --mode=development",
+    "build:production": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
