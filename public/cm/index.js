@@ -5,7 +5,7 @@ var urlParams = new URLSearchParams(window.location.search);
 const mode = encodeURIComponent(urlParams.get("mode"));
 const mainProfile = document.querySelector(".user-profile");
 axios
-  .get(url)
+  .get(window.location.origin + "/get-port")
   .then(
     (data) =>
       (document.querySelector('input[name = "vport"]').value = data.data.port)
