@@ -98,7 +98,7 @@ chat_search_input.addEventListener("keyup", () => {
   textFind(tts);
 });
 
-setActionPort(port){
+function setActionPort(port) {
   ActionPort = port;
 }
 
