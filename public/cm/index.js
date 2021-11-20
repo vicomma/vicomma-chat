@@ -8,12 +8,8 @@ const port = document.querySelector('input[name = "vport"]').value;
 console.log(port);
 
 const getPort = async () => {
-  return await axios
-    .get(window.location.origin + "/get-port")
-    .then(
-      (data) =>
-        (document.querySelector('input[name = "vport"]').value = data.data.port)
-    );
+  let response = await axios.get(window.location.origin + "/get-port");
+  return response.data.port;
 };
 
 const socket = io(
