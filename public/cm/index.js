@@ -11,13 +11,11 @@ axios
       (document.querySelector('input[name = "vport"]').value = data.data.port)
   );
 
-setTimeout(() => {
-  const socket = io(
-    `ws://vicommadev-chat.herokuapp.com:${
-      document.querySelector('input[name = "vport"]').value
-    }`
-  );
-}, 2000);
+const socket = io(
+  `ws://vicommadev-chat.herokuapp.com:${
+    document.querySelector('input[name = "vport"]').value
+  }`
+);
 
 // const SpeechRecognition = webkitSpeechRecognition;
 // const recognition = new SpeechRecognition(); //new SpeechRecognition object
