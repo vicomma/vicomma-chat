@@ -5,6 +5,8 @@ var urlParams = new URLSearchParams(window.location.search);
 const mode = encodeURIComponent(urlParams.get("mode"));
 const mainProfile = document.querySelector(".user-profile");
 
+const socket = io("ws://vicommadev-chat.herokuapp.com/:14551");
+
 // const SpeechRecognition = webkitSpeechRecognition;
 // const recognition = new SpeechRecognition(); //new SpeechRecognition object
 // recognition.continuous = false;
