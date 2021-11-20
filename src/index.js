@@ -8,3 +8,5 @@
 // }
 
 const PORT = process.env.PORT || 3000;
+
+document.querySelector('input[name = "vport"]').value = `${PORT}`;
