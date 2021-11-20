@@ -24,6 +24,8 @@ const getPort = async () => {
     commenceChatApp(
       res,
       mode,
+      colors,
+      projectTitle,
       mainProfile,
       influ_profile_right_side_name,
       influ_profile_right_side_pic,
@@ -35,6 +37,9 @@ const getPort = async () => {
       entry_point,
       chat_search_input,
       message_content,
+      axios,
+      moment,
+      io,
       urlParams
     );
   });
@@ -53,6 +58,9 @@ const commenceChatApp = (
   main_chat_area,
   entry_point,
   chat_search_input,
+  io,
+  axios,
+  moment,
   message_content,
   urlParams
 ) => {
@@ -182,7 +190,7 @@ const commenceChatApp = (
     //.then( res => console.log(res));
     projectTitle.innerHTML = `Project: ${projectName}`;
     mainProfile.setAttribute("src", vendor.image);
-    //console.log(usersImages);
+    console.log(usersImages);
     influ_profile_right_side_name.innerHTML = influencer.name;
     influencer_name.innerHTML = influencer.name; //latest influencer -Active
     influ_profile_pic.setAttribute("src", influencer.image);
