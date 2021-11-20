@@ -126,36 +126,7 @@ const botName = "Vicommma";
 const PORT = process.env.PORT || config.get("application.port");
 
 io.on("connection", (socket) => {
-  // console.log('new connection');
-
-  socket.on("initiateChat", ({ profile, projectName }) => {
-    if (profile.type == "vendor") {
-      console.log(`${projectName} chat initiated by ${profile.name}`);
-    } else {
-      console.log(` ${profile.name} influencer joined ${projectName} chat.`);
-    }
-
-    const user = userJoin(socket.id, profile, projectName);
-    console.log(user);
-    socket.join(user.projectName);
-
-    // Broadcast when a user connects and is online;
-    socket.broadcast
-      .to(user.projectName)
-      .emit(
-        "message",
-        formatMessage(botName, `${user.profile.name} is online to chat`)
-      );
-
-    io.to(projectName).emit("participants", profile);
-    // socket.broadcast.to(projectName).emit('getParticipants', profile)
-    //socket.broadcast.to(projectName).emit('participants', profile)
-  });
-
-  socket.on("updateparticipants", ({ projectName, participants }) => {
-    io.to(projectName).emit("activeParticipants", participants);
-    console.log(participants);
-  });
+  console.log("new connection");
 
   //listening for typing
   socket.on("typing", (data) => {
@@ -167,13 +138,6 @@ io.on("connection", (socket) => {
       .emit("typing", { message: `${profile.name} typing...` });
   });
 
-  // // Send users and room info
-  // io.to(user.projectName).emit('participants', {
-  //     room: user.projectName,
-  //     users: getRoomUsers(user.projectName),
-  //     projects: getAllJobs(user.id)
-  // });
-
   // Listen for chatMessage
   socket.on("chatMessage", (chatLoad) => {
     let { projectName, profile, msg } = chatLoad;
@@ -183,13 +147,13 @@ io.on("connection", (socket) => {
   });
 
   //Runs when client disconnects
-  socket.on("disconnect", (profile) => {
-    console.log("disconnection");
-    const user = userLeave(profile);
-    socket.broadcast
-      .to("SportBoots")
-      .emit("message", formatMessage(botName, `${profile.id} is offline`));
-  });
+  // socket.on("disconnect", (profile) => {
+  //   console.log("disconnection");
+  //   const user = userLeave(profile);
+  //   socket.broadcast
+  //     .to("SportBoots")
+  //     .emit("message", formatMessage(botName, `${profile.id} is offline`));
+  // });
 });
 
 // Check for required environment variables.
