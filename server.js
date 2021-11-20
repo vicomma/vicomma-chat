@@ -139,11 +139,11 @@ io.on("connection", (socket) => {
   });
 
   // Listen for chatMessage
-  socket.on("chatMessage", (chatLoad) => {
+  socket.on("message", (chatLoad) => {
     let { projectName, profile, msg } = chatLoad;
     // console.log(`${ profile.name }: ${ msg }`);
     const user = getCurrentUser(profile);
-    io.to(projectName).emit("message", formatMessage(profile.name, msg));
+    io.to(projectName).emit("newMessage", formatMessage(profile.name, msg));
   });
 
   //Runs when client disconnects

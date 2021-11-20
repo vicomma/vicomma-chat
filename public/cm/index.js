@@ -56,13 +56,16 @@ entry_point.addEventListener("keyup", function (event) {
         owner: mode,
       }
     );
-    //TO DO - sanitize that before entry
+    //TODO - sanitize that before entry
     newMessage.text = entry_point.value;
     if ($(".no-messages")) {
       $(".no-messages").hide();
     }
-    recentMessages.push(newMessage); //if err occur handler
-    displayNewMessage(newMessage);
+    recentMessages.push(newMessage); //if error occur handler
+
+    //emit a message sent
+    socket.emit("message", newMessage);
+
     entry_point.value = "";
   }
 });
@@ -122,6 +125,11 @@ async function postData(url = "", data = {}) {
     headers: headers,
   });
 }
+
+//listen for new message
+socket.on("newMessage", (newMessage) => {
+  displayNewMessage(newMessage);
+});
 
 async function getData(url = "", callback) {
   // Default options are marked with *
@@ -255,7 +263,7 @@ const displayNewMessage = ({ id, date, text, owner }) => {
   let usersImages = localStorage.usersImages.split(",");
   let actor = owner == "vendor" ? 0 : 1;
   let sentBy = owner == "vendor" ? "owner" : "";
-  let dateCreated = moment(Date.now()).format("h:mm a");
+  let dateCreated = date;
   let Div = document.createElement("div");
   Div.innerHTML = `<div id="${id}" class="chat-msg ${sentBy}">
     <div class="chat-msg-profile">
