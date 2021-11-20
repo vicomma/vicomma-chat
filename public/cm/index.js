@@ -6,9 +6,19 @@ const mode = encodeURIComponent(urlParams.get("mode"));
 const mainProfile = document.querySelector(".user-profile");
 const port = document.querySelector('input[name = "vport"]').value;
 console.log(port);
+
+const getPort = async () => {
+  return await axios
+    .get(window.location.origin + "/get-port")
+    .then(
+      (data) =>
+        (document.querySelector('input[name = "vport"]').value = data.data.port)
+    );
+};
+
 const socket = io(
   `ws://vicommadev-chat.herokuapp.com:${document.document.querySelector(
-    parseInt(port)
+    parseInt(getPort())
   )}`
 );
 
