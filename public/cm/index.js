@@ -4,14 +4,12 @@ const projectTitle = document.querySelector(".chat-area-title");
 var urlParams = new URLSearchParams(window.location.search);
 const mode = encodeURIComponent(urlParams.get("mode"));
 const mainProfile = document.querySelector(".user-profile");
-const getPort = async () => {
-  let response = await axios.get(window.location.origin + "/get-port");
-  return response;
+const getPort = () => {
+  let response = axios.get(window.location.origin + "/get-port");
+  return response.data.port;
 };
-console.log(getPort());
-const socket = io(
-  `ws://vicommadev-chat.herokuapp.com:${parseInt(getPort().data.port)}`
-);
+
+const socket = io(`ws://vicommadev-chat.herokuapp.com:${parseInt(getPort())}`);
 
 // const SpeechRecognition = webkitSpeechRecognition;
 // const recognition = new SpeechRecognition(); //new SpeechRecognition object
