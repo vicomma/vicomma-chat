@@ -46,6 +46,10 @@ var corsOptions = {
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
+app.get("/get-port", function (req, res) {
+  return res.send({ port: process.env.PORT || port });
+});
+
 app.post("/register-chat", cors({ origin: "*" }), async (req, res) => {
   const { vendor, projectName, influencer } = req.body;
   // console.log(influencer)
