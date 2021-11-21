@@ -4,8 +4,6 @@ const projectTitle = document.querySelector(".chat-area-title");
 var urlParams = new URLSearchParams(window.location.search);
 const mode = encodeURIComponent(urlParams.get("mode"));
 const mainProfile = document.querySelector(".user-profile");
-let ActionPort = "";
-var socket = "";
 const influencer_name = document.querySelector(".msg-username");
 const influ_profile_pic = document.querySelector(".msg-profile");
 const influ_profile_right_side_name = document.querySelector(".detail-title");
@@ -283,8 +281,8 @@ window.addEventListener("message", (message) => {
   //collect chat data from message vendor_id:influencer_id
   // console.log(message.data);
   const { id, port } = message.data;
-  let ActionPort = port;
-  let socket = io("ws://" + window.location.origin + ":" + ActionPort);
+  var ActionPort = port;
+  var socket = io("ws://" + window.location.origin + ":" + ActionPort);
 
   const chatConfig = {
     ActionPort,
