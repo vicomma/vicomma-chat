@@ -99,13 +99,9 @@ chat_search_input.addEventListener("keyup", () => {
   textFind(tts);
 });
 
-function setActionPort(port) {
-  ActionPort = port;
-  socket = io("ws://" + window.location.origin + ":" + ActionPort);
-}
-
-const renderApp = (data) => {
+const renderApp = (data, chatConfig) => {
   let { projectName, vendor, influencer, messages, id } = data;
+  let { socket } = chatConfig;
   console.log(data);
   const usersImages = [vendor.image, influencer.image];
   localStorage.setItem("pair", `${vendor.id}:${influencer.id}`);
@@ -123,16 +119,7 @@ const renderApp = (data) => {
   influ_profile_right_side_pic.setAttribute("src", influencer.image);
   initiatedDate.innerHTML = `Chat initiated on ${moment("20210804").format(
     "MMM Do YYYY"
-  )}`; //save on db and return with encrypted data (d-m-YYYY)
-  // let influencers = getInfluencers();// arranged by last added. this FILO stack
-  //     let influencers = [{
-  //         name: "Abraham Olaobaju 2"
-  //     },{
-  //         name: "Sabastine Nwanchuku"
-  //     }]
-  // influencers.forEach(influencer => {
-  //     influencer_names.innerHTML = influencer.name;
-  // });
+  )}`;
 
   var imagesLength = usersImages.length;
   participants.forEach((participant) => {
@@ -147,12 +134,12 @@ const renderApp = (data) => {
       }
     }
   });
-};
 
-//listen for new message
-socket.on("newMessage", (newMessage) => {
-  displayNewMessage(newMessage);
-});
+  //listen for new message
+  socket.on("newMessage", (newMessage) => {
+    displayNewMessage(newMessage);
+  });
+};
 
 async function getData(url = "", callback) {
   // Default options are marked with *
@@ -296,10 +283,16 @@ window.addEventListener("message", (message) => {
   //collect chat data from message vendor_id:influencer_id
   // console.log(message.data);
   const { id, port } = message.data;
-  setActionPort(port);
+  let ActionPort = port;
+  let socket = io("ws://" + window.location.origin + ":" + ActionPort);
+
+  const chatConfig = {
+    ActionPort,
+    socket,
+  };
   axios
     .get(window.location.origin + "/rcd?id=" + id)
-    .then((data) => renderApp(data.data));
+    .then((data) => renderApp(data.data, chatConfig));
 });
 
 // recognition.onstart = function() {
