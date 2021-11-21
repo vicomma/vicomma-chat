@@ -37,31 +37,6 @@ colors.forEach((color) => {
 //     //socket.emit('typing', {projectName, profile})
 // });
 const recentMessages = [];
-entry_point.addEventListener("keyup", function (event) {
-  if (event.key === "Enter") {
-    // Enter key was hit
-    let newMessage = Object.assign(
-      {},
-      {
-        id: Date.now().toString(),
-        date: moment().format("h:mm a"),
-        text: "",
-        owner: mode,
-      }
-    );
-    //TODO - sanitize that before entry
-    newMessage.text = entry_point.value;
-    if ($(".no-messages")) {
-      $(".no-messages").hide();
-    }
-    recentMessages.push(newMessage); //if error occur handler
-
-    //emit a message sent
-    socket.emit("message", newMessage);
-
-    entry_point.value = "";
-  }
-});
 
 function textFind(keyword) {
   if (keyword) {
@@ -130,6 +105,32 @@ const renderApp = (data, chatConfig) => {
       if (typeof participant !== undefined) {
         participant.remove();
       }
+    }
+  });
+
+  entry_point.addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+      // Enter key was hit
+      let newMessage = Object.assign(
+        {},
+        {
+          id: Date.now().toString(),
+          date: moment().format("h:mm a"),
+          text: "",
+          owner: mode,
+        }
+      );
+      //TODO - sanitize that before entry
+      newMessage.text = entry_point.value;
+      if ($(".no-messages")) {
+        $(".no-messages").hide();
+      }
+      recentMessages.push(newMessage); //if error occur handler
+
+      //emit a message sent
+      socket.emit("message", newMessage);
+
+      entry_point.value = "";
     }
   });
 
